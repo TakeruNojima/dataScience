@@ -80,7 +80,7 @@ Ide proyek **berasal dari mahasiswa** dan harus selaras dengan **salah satu** da
 | **Indikator kontribusi** | Bagaimana hasil model berkontribusi pada target SDG (langsung/tidak langsung)? | [ Memberikan peringatan dini berbasis data bagi warga dan pihak berwenang untuk mengambil tindakan mitigasi sebelum bencana terjadi. ] |
 | **Pertimbangan etika** | Risiko bias, privasi, atau dampak salah prediksi? | [ Risiko False Negative (wilayah rawan diprediksi aman) sangat berbahaya bagi keselamatan; serta potensi bias data jika sampel wilayah kurang seimbang. Tidak melibatkan data privat penduduk. ] |
 
-**Sumber ide:** [Jelaskan dari mana ide muncul: pengalaman pribadi, lingkungan sekitar, isu lokal/nasional, dll.]
+**Sumber ide:** Diangkat dari isu nyata tingginya banjir musiman di berbagai wilayah Indonesia (seperti Jakarta dan Semarang) akibat curah hujan ekstrem, penurunan muka tanah, serta alih fungsi lahan, yang menuntut sistem mitigasi bencana berbasis data iklim.
 
 ### 2.3 Ringkasan Alur Lifecycle Proyek
 Jelaskan dalam 1 paragraf pendek bagaimana proyek Anda melewati tahap L → M → O → P (dan iterasi apa yang direncanakan).
