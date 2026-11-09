@@ -4,16 +4,16 @@
 **Judul Proyek:**  
 [(Contoh: "Klasifikasi Penyakit Daun Menggunakan CNN", "Prediksi Harga Rumah dengan Machine Learning", "Analisis Sentimen Ulasan Produk")]
 
-**Nama Mahasiswa:** [Nama Lengkap]  
-**NIM:** [Nomor Induk Mahasiswa]  
-**Program Studi:** [Teknologi Informasi / Rekayasa Perangkat Lunak]  
-**Mata Kuliah:** [Nama Mata Kuliah]  
+**Nama Mahasiswa:** [Takeru Putra Nojima - Satrio yunan wicaksono]  
+**NIM:** [244311029 - 244311027]  
+**Program Studi:** [Rekayasa Perangkat Lunak]  
+**Mata Kuliah:** [Data Science]  
 **Dosen Pengampu:** [Nama Dosen]  
 **Tahun Akademik:** [Tahun/Semester]  
-**Link GitHub Repository:** [URL Repository]  
+**Link GitHub Repository:** [https://github.com/TakeruNojima/dataScience]  
 **Link Video Pembahasan:** [URL Video (YouTube/Drive)]  
-**SDG yang Dipilih:** [Nomor & nama Goal, misal: SDG 3 – Kehidupan Sehat dan Sejahtera]  
-**Target SDG yang Relevan:** [misal: Target 3.4 – mengurangi kematian dini akibat penyakit tidak menular]
+**SDG yang Dipilih:** [Nomor & nama Goal, misal: SDG - 11 - Kota dan Permukiman yang Berkelanjutan]  
+**Target SDG yang Relevan:** [misal: Target 13.1 Memperkuat ketahanan dan kapasitas adaptasi terhadap bahaya terkait iklim dan bencana alam]
 
 ---
 
@@ -59,16 +59,13 @@ Pada proyek ini, mahasiswa diharapkan dapat:
 
 ### 2.1 Latar Belakang
 **Isi bagian ini dengan:**
-- Mengapa proyek ini penting?
-- Permasalahan umum pada domain terkait (misal: kesehatan, pendidikan, keuangan, pertanian, NLP, computer vision, dll.)
-- Manfaat proyek untuk pengguna, bisnis, atau penelitian
-- Studi literatur atau referensi ilmiah (minimal 1–2 sumber wajib)
-- Keterkaitan masalah dengan SDGs yang dipilih (dijabarkan di Bab 2.2)
+Bencana banjir merupakan salah satu masalah hidrometeorologi yang paling sering terjadi dan menimbulkan kerugian besar terhadap infrastruktur, ekonomi, serta keselamatan jiwa manusia. Di banyak wilayah, banjir sering datang secara mendadak akibat kombinasi curah hujan ekstrem dan kondisi topografi atau ketinggian tanah yang rendah. Oleh karena itu, pembangunan sistem peringatan dini berbasis teknologi sangat penting untuk mendeteksi potensi bahaya lebih awal sehingga mitigasi dan evakuasi dapat dilakukan secara terarah. Proyek ini bermanfaat bagi masyarakat luas, instansi penanggulangan bencana, serta peneliti dalam merancang strategi pencegahan dampak banjir secara proaktif.
 
-**Contoh referensi (berformat APA/IEEE):**
-> Goodfellow, I., Bengio, Y., & Courville, A. (2016). *Deep Learning*. MIT Press.
+Penelitian terkait pemodelan bencana dan hidrologi didukung oleh berbagai literatur ilmiah, salah satunya mengenai pemanfaatan pendekatan komputasi cerdas dalam mengenali pola data lingkungan:
 
-**[Jelaskan konteks dan latar belakang proyek]**
+    Goodfellow, I., Bengio, Y., & Courville, A. (2016). Deep Learning. MIT Press.
+
+Permasalahan ini selaras langsung dengan SDG 11 (Kota dan Permukiman yang Berkelanjutan) dan SDG 13 (Penanganan Perubahan Iklim), di mana pemanfaatan teknologi analitik data iklim dan topografi dapat meningkatkan ketahanan kota terhadap bencana alam.
 
 ### 2.2 Keterkaitan dengan SDGs (WAJIB)
 
@@ -76,12 +73,12 @@ Ide proyek **berasal dari mahasiswa** dan harus selaras dengan **salah satu** da
 
 | Komponen | Pertanyaan Panduan | Jawaban Anda |
 |----------|--------------------|--------------|
-| **SDG yang dipilih** | Goal nomor berapa dan apa namanya? | [ ... ] |
-| **Target SDG** | Target (misal 3.4, 13.1) mana yang paling relevan? | [ ... ] |
-| **Masalah nyata** | Masalah konkret apa yang diangkat? Siapa yang terdampak? | [ ... ] |
-| **Peran ML** | Mengapa ML/DL cocok? Apa keputusan atau proses yang dibantu? | [ ... ] |
-| **Indikator kontribusi** | Bagaimana hasil model berkontribusi pada target SDG (langsung/tidak langsung)? | [ ... ] |
-| **Pertimbangan etika** | Risiko bias, privasi, atau dampak salah prediksi? | [ ... ] |
+| **SDG yang dipilih** | Goal nomor berapa dan apa namanya? | [ SDG 11: Kota dan Permukiman yang Berkelanjutan (Sustainable Cities and Communities) & SDG 13: Penanganan Perubahan Iklim ] |
+| **Target SDG** | Target (misal 3.4, 13.1) mana yang paling relevan? | [ Target 11.5 (Mengurangi dampak buruk bencana alam) dan Target 13.1 (Memperkuat kapasitas adaptasi terhadap bencana iklim) ] |
+| **Masalah nyata** | Masalah konkret apa yang diangkat? Siapa yang terdampak? | [ Tingginya risiko banjir akibat curah hujan tinggi di wilayah bertopografi rendah yang mengancam keselamatan warga dan merusak fasilitas umum. ] |
+| **Peran ML** | Mengapa ML/DL cocok? Apa keputusan atau proses yang dibantu? | [ ML/DL mampu memproses pola hubungan non-linear yang kompleks antara curah hujan dan ketinggian wilayah untuk mengotomatisasi klasifikasi tingkat risiko banjir secara akurat. ] |
+| **Indikator kontribusi** | Bagaimana hasil model berkontribusi pada target SDG (langsung/tidak langsung)? | [ Memberikan peringatan dini berbasis data bagi warga dan pihak berwenang untuk mengambil tindakan mitigasi sebelum bencana terjadi. ] |
+| **Pertimbangan etika** | Risiko bias, privasi, atau dampak salah prediksi? | [ Risiko False Negative (wilayah rawan diprediksi aman) sangat berbahaya bagi keselamatan; serta potensi bias data jika sampel wilayah kurang seimbang. Tidak melibatkan data privat penduduk. ] |
 
 **Sumber ide:** [Jelaskan dari mana ide muncul: pengalaman pribadi, lingkungan sekitar, isu lokal/nasional, dll.]
 
@@ -90,7 +87,7 @@ Jelaskan dalam 1 paragraf pendek bagaimana proyek Anda melewati tahap L → M �
 
 **[Tulis ringkasan alur lifecycle proyek Anda]**
 
----
+Proyek ini dimulai dari tahap Learning Problem (L) dengan merumuskan tujuan prediksi risiko banjir dan memahami struktur dataset tabular dari Kaggle. Selanjutnya, data dibersihkan dan disiapkan, disusul dengan tahap Model Design (M) dan Optimization (O) untuk melatih model baseline, advanced (Random Forest/XGBoost), hingga deep learning (MLP). Tahap terakhir adalah Predict & Evaluate (P) untuk menguji performa model pada test set, melakukan analisis kesalahan, serta melakukan iterasi perbaikan jika diperlukan.
 
 ## 3. BUSINESS UNDERSTANDING / PROBLEM UNDERSTANDING  **[L]**
 
@@ -105,15 +102,19 @@ Tuliskan 2–4 pernyataan masalah yang jelas dan spesifik.
 
 **[Tulis problem statements Anda di sini]**
 
+1. Tingginya variasi faktor lingkungan seperti intensitas curah hujan dan ketinggian wilayah menuntut model untuk mampu memprediksi tingkat risiko banjir dengan akurasi dan ketepatan yang tinggi.
+2. Dataset mentah dari sumber publik sering kali mengandung noise, nilai yang hilang (missing values), atau rentang skala fitur yang tidak seragam sehingga memerlukan proses data preprocessing dan pembersihan yang teliti.
+3. Hubungan antara kondisi topografi dan kerentanan banjir bersifat non-linear, sehingga diperlukan perbandingan performa antara model machine learning konvensional dan deep learning untuk menemukan arsitektur yang paling optimal.
+
 ### 3.2 Formulasi Learning Problem (WAJIB)
 
 Rumuskan masalah dalam kerangka *Learning Problem*:
 
 | Komponen | Pertanyaan Panduan | Jawaban Anda |
 |----------|--------------------|--------------|
-| **Target** | Apa yang diprediksi? Jenis tugas (klasifikasi biner/multikelas, regresi, forecasting, clustering, dll.)? | [ ... ] |
-| **Objective** | Apa yang dioptimalkan/diminimalkan secara matematis (misal: cross-entropy, MSE)? Metrik keberhasilan utama? | [ ... ] |
-| **Data** | Sumber, ukuran, jenis, dan asumsi tentang data (i.i.d.? distribusi train vs test?) | [ ... ] |
+| **Target** | Apa yang diprediksi? Jenis tugas (klasifikasi biner/multikelas, regresi, forecasting, clustering, dll.)? | [ Memprediksi tingkat Risiko Banjir (Klasifikasi Biner/Multikelas: Rendah, Sedang, Tinggi) ] |
+| **Objective** | Apa yang dioptimalkan/diminimalkan secara matematis (misal: cross-entropy, MSE)? Metrik keberhasilan utama? | [ Meminimalkan cross-entropy loss (kesalahan klasifikasi), dengan metrik utama berupa F1-Score dan Recall untuk menghindari kesalahan prediksi wilayah berbahaya. ] |
+| **Data** | Sumber, ukuran, jenis, dan asumsi tentang data (i.i.d.? distribusi train vs test?) | [ Dataset tabular dari Kaggle (Flood Prediction Dataset), berisi ribuan baris data fitur curah hujan, ketinggian, dan lingkungan berformat CSV. ] |
 
 ### 3.3 Goals
 
