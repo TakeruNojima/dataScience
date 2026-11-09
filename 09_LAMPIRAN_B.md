@@ -2,7 +2,7 @@
 
 | Komponen | Isian Mahasiswa |
 |----------|-----------------|
-| Nama / NIM | [ Takeru Putra Nojima / 029 - Satrio yunan wicaksono  ] |
+| Nama / NIM | [ Takeru Putra Nojima / 029 - Satrio yunan wicaksono / 027 ] |
 
 | Judul ide | [ Memprediksi Risiko Banjir di Suatu Wilayah Berdasarkan Curah Hujan dan Ketinggian Wilayah Menggunakan Pendekatan Machine Learning dan Deep Learning ] |
 
