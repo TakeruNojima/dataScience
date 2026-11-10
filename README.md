@@ -6,11 +6,9 @@ INDEKS DOKUMEN PROYEK
 
 Seluruh berkas administrasi dan laporan proyek tersimpan di dalam folder docs/:
 
-docs/09_LAMPIRAN_B.md — Formulir Pengajuan Ide (Checkpoint 1) yang memuat formulasi learning problem, rincian dataset Kaggle, mitigasi etika, dan referensi awal.
-
-docs/09_minggu9.md — Panduan tahapan dan checklist pengerjaan minggu pertama (Learning Problem).
-
-docs/Laporan_Proyek_ML_LMOP.md — Laporan utama proyek mencakup Bab 1 hingga Bab 11 (Project Overview, Data Preparation, Modeling, hingga Evaluation).
+- [docs/09_LAMPIRAN_B.md](./docs/09_LAMPIRAN_B.md)
+- [docs/09_minggu9.md](./docs/09_minggu9.md)
+- [docs/Laporan_Proyek_ML_LMOP.md](./docs/Laporan_Proyek_ML_LMOP.md)
 
 GAMBARAN UMUM PROYEK
 
