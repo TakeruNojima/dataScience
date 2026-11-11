@@ -2,7 +2,7 @@
 
 | Komponen | Isian Mahasiswa |
 |----------|-----------------|
-| Nama / NIM | Takeru Putra Nojima / 244311029 <br/> Satriyo Yunan Wicaksono / 24311027 |
+| Nama / NIM | Takeru Putra Nojima / 244311029 <br/> Satriyo Wicaksono Yunan M / 24311027 |
 | Judul ide | **Prediksi Tingkat Risiko Banjir Berdasarkan Curah Hujan dan Ketinggian Wilayah Menggunakan Pendekatan Machine Learning dan Deep Learning** |
 | SDG & target yang dipilih | **SDG 11:** Kota dan Permukiman yang Berkelanjutan (Target 11.5: Mengurangi jumlah korban dan dampak ekonomi akibat bencana, termasuk bencana yang berkaitan dengan banjir). <br/> **SDG 13:** Penanganan Perubahan Iklim (Target 13.1: Memperkuat ketahanan dan kapasitas adaptasi terhadap bahaya terkait iklim dan bencana alam). |
 | Masalah nyata yang diangkat | Banjir merupakan salah satu bencana yang sering terjadi akibat tingginya curah hujan serta kondisi geografis wilayah, seperti ketinggian tanah dan kemampuan drainase. Wilayah dengan curah hujan tinggi dan ketinggian yang rendah cenderung memiliki risiko banjir lebih besar. Kurangnya informasi mengenai tingkat risiko banjir dapat menghambat upaya mitigasi dan kesiapsiagaan masyarakat. Oleh karena itu, diperlukan pendekatan Machine Learning dan Deep Learning untuk memprediksi tingkat risiko banjir berdasarkan data curah hujan dan kondisi wilayah sehingga dapat membantu memberikan informasi awal dalam proses mitigasi bencana. |
