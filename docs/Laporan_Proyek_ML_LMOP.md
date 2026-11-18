@@ -1,8 +1,6 @@
----
-## INFORMASI PROYEK
 
-**Judul Proyek:**  
-[(Contoh: "Klasifikasi Penyakit Daun Menggunakan CNN", "Prediksi Harga Rumah dengan Machine Learning", "Analisis Sentimen Ulasan Produk")]
+**Judul Proyek: Prediksi Tingkat Risiko Banjir Berdasarkan Curah Hujan dan Ketinggian Wilayah Menggunakan Pendekatan Machine Learning dan Deep Learning**  
+
 
 **Nama Mahasiswa:** [Takeru Putra Nojima - Satrio yunan wicaksono]  
 **NIM:** [244311029 - 244311027]  
@@ -12,7 +10,7 @@
 **Tahun Akademik:** [Tahun/Semester]  
 **Link GitHub Repository:** [https://github.com/TakeruNojima/dataScience]  
 **Link Video Pembahasan:** [URL Video (YouTube/Drive)]  
-**SDG yang Dipilih:** [Nomor & nama Goal, misal: SDG - 11 - Kota dan Permukiman yang Berkelanjutan]  
+**SDG yang Dipilih:** SDG - 11 - Kota dan Permukiman yang Berkelanjutan dan SDG - 13 - Penanganan Perubahan Iklim
 **Target SDG yang Relevan:** [misal: Target 13.1 Memperkuat ketahanan dan kapasitas adaptasi terhadap bahaya terkait iklim dan bencana alam]
 
 ---
@@ -201,174 +199,175 @@ Model deep learning yang sesuai dengan jenis data.
 ## 4. DATA UNDERSTANDING  **[L]**
 ### 4.1 Informasi Dataset
 **Sumber Dataset:**  
-[Sebutkan sumber: Kaggle, UCI ML Repository, atau sumber lain dengan URL]
+Kaggle – Flood Prediction Dataset (file `train.csv`).
 
 **Deskripsi Dataset:**
-- Jumlah baris (rows): [angka]
-- Jumlah kolom (columns/features): [angka]
-- Tipe data: [Tabular / Image / Text / Time Series / Audio / Video]
-- Ukuran dataset: [MB/GB]
-- Format file: [CSV / JSON / Images / TXT / etc.]
+- Jumlah baris (rows): 1117957
+- Jumlah kolom (columns/features): 22
+- Tipe data: Tabular
+- Ukuran dataset: 30 MB
+- Format file: CSV
 
 ### 4.2 Deskripsi Fitur
 Jelaskan setiap fitur/kolom yang ada dalam dataset.
-**Contoh tabel:**
-| Nama Fitur | Tipe Data | Deskripsi | Contoh Nilai |
-|------------|-----------|-----------|--------------|
-| id | Integer | ID unik data | 1, 2, 3 |
-| age | Integer | Usia (tahun) | 25, 30, 45 |
-| income | Float | Pendapatan (juta) | 5.5, 10.2 |
-| category | Categorical | Kategori produk | A, B, C |
-| text | String | Teks ulasan | "Produk bagus..." |
-| image | Image | Citra 224x224 RGB | Array 224x224x3 |
-| label | Categorical | Label target | 0, 1 atau "positif", "negatif" |
+
+| Nama Fitur | Tipe Data | Deskripsi |
+|---|---|---|
+| `id` | Integer (`int64`) | Nomor identitas/urutan setiap baris data; tidak digunakan sebagai fitur prediksi. |
+| `MonsoonIntensity` | Integer (`int64`) | Skor intensitas musim monsun. |
+| `TopographyDrainage` | Integer (`int64`) | Skor kondisi topografi yang berkaitan dengan kemampuan drainase wilayah. |
+| `RiverManagement` | Integer (`int64`) | Skor pengelolaan sungai. |
+| `Deforestation` | Integer (`int64`) | Skor kondisi/tingkat deforestasi. |
+| `Urbanization` | Integer (`int64`) | Skor tingkat urbanisasi. |
+| `ClimateChange` | Integer (`int64`) | Skor faktor perubahan iklim. |
+| `DamsQuality` | Integer (`int64`) | Skor kualitas bendungan. |
+| `Siltation` | Integer (`int64`) | Skor sedimentasi atau pendangkalan. |
+| `AgriculturalPractices` | Integer (`int64`) | Skor praktik kegiatan pertanian. |
+| `Encroachments` | Integer (`int64`) | Skor gangguan/penyempitan area sungai atau wilayah terkait. |
+| `IneffectiveDisasterPreparedness` | Integer (`int64`) | Skor ketidakefektifan kesiapsiagaan bencana. |
+| `DrainageSystems` | Integer (`int64`) | Skor kondisi sistem drainase. |
+| `CoastalVulnerability` | Integer (`int64`) | Skor kerentanan wilayah pesisir. |
+| `Landslides` | Integer (`int64`) | Skor faktor kejadian/kerawanan tanah longsor. |
+| `Watersheds` | Integer (`int64`) | Skor kondisi daerah aliran sungai (DAS). |
+| `DeterioratingInfrastructure` | Integer (`int64`) | Skor penurunan/kondisi memburuknya infrastruktur. |
+| `PopulationScore` | Integer (`int64`) | Skor faktor populasi atau kepadatan penduduk. |
+| `WetlandLoss` | Integer (`int64`) | Skor kehilangan lahan basah. |
+| `InadequatePlanning` | Integer (`int64`) | Skor ketidakmemadaian perencanaan wilayah. |
+| `PoliticalFactors` | Integer (`int64`) | Skor faktor politik yang berkaitan dengan pengelolaan risiko. |
+| `FloodProbability` | Float (`float64`) | Nilai probabilitas banjir; digunakan untuk membentuk target klasifikasi `RiskLevel`, bukan sebagai fitur masukan model. |
 
 **[Buat tabel deskripsi fitur Anda di sini]**
 
 ### 4.3 Kondisi Data
 
-Jelaskan kondisi dan permasalahan data:
+Berdasarkan pemeriksaan yang dijalankan pada notebook, kondisi data yang dapat dipastikan adalah sebagai berikut.
 
-- **Missing Values:** [Ada/Tidak, berapa persen?]
-- **Duplicate Data:** [Ada/Tidak, berapa banyak?]
-- **Outliers:** [Ada/Tidak, pada fitur apa?]
-- **Imbalanced Data:** [Ada/Tidak, rasio kelas?]
-- **Noise:** [Jelaskan jika ada]
-- **Data Quality Issues:** [Jelaskan jika ada masalah lain]
-- **Asumsi Data (i.i.d., distribusi train-test, potensi data leakage):** [Jelaskan]
+- **Missing Values:** Tidak ditemukan nilai kosong. Hasil `df.isnull().sum().sum()` adalah **0** untuk seluruh dataset.
+- **Duplicate Data:** Tidak ditemukan baris duplikat. Hasil `df.duplicated().sum()` adalah **0**.
+- **Outliers:** Belum dilakukan pemeriksaan outlier menggunakan boxplot, IQR, atau metode statistik lainnya. Oleh sebab itu, belum dapat disimpulkan apakah dataset memiliki outlier.
+- **Imbalanced Data:** Distribusi target hasil pembentukan kelas tidak seimbang. Rinciannya:
+
+| Kelas Risiko | Jumlah Data | Persentase |
+|---|---:|---:|
+| Rendah | 170.142 | 15,22% |
+| Sedang | 754.540 | 67,49% |
+| Tinggi | 193.275 | 17,29% |
+| **Total** | **1.117.957** | **100%** |
 
 ### 4.4 Exploratory Data Analysis (EDA) - (**OPSIONAL**)
 
-**Requirement:** Minimal 3 visualisasi yang bermakna dan insight-nya.
-**Contoh jenis visualisasi yang dapat digunakan:**
-- Histogram (distribusi data)
-- Boxplot (deteksi outliers)
-- Heatmap korelasi (hubungan antar fitur)
-- Bar plot (distribusi kategori)
-- Scatter plot (hubungan 2 variabel)
-- Wordcloud (untuk text data)
-- Sample images (untuk image data)
-- Time series plot (untuk temporal data)
-- Confusion matrix heatmap
-- Class distribution plot
+Notebook yang diberikan telah membuat satu visualisasi distribusi kelas risiko menggunakan bar chart (`countplot`). Visualisasi ini menunjukkan bahwa kelas Sedang memiliki jumlah data paling besar.
 
+#### Visualisasi 1: Distribusi Jumlah Data Berdasarkan Tingkat Risiko Banjir
 
-#### Visualisasi 1: [Judul Visualisasi]
-[Insert gambar/plot]
+Visualisasi dibuat menggunakan `sns.countplot()` dengan urutan kelas Rendah, Sedang, dan Tinggi.
 
-**Insight:**  
-[Jelaskan apa yang dapat dipelajari dari visualisasi ini]
+**Insight:** Kelas Sedang berjumlah 754.540 data (67,49%), jauh lebih banyak dibandingkan kelas Rendah sebanyak 170.142 data (15,22%) dan kelas Tinggi sebanyak 193.275 data (17,29%). Distribusi ini menunjukkan ketidakseimbangan kelas yang perlu diperhatikan pada proses pelatihan dan evaluasi model.
 
-#### Visualisasi 2: [Judul Visualisasi]
-
-[Insert gambar/plot]
-
-**Insight:**  
-[Jelaskan apa yang dapat dipelajari dari visualisasi ini]
-
-#### Visualisasi 3: [Judul Visualisasi]
-
-[Insert gambar/plot]
-
-**Insight:**  
-[Jelaskan apa yang dapat dipelajari dari visualisasi ini]
-
----
 
 ## 5. DATA PREPARATION  **[L]**
 
-Bagian ini menjelaskan **semua** proses transformasi dan preprocessing data yang dilakukan.
-### 5.1 Data Cleaning
-**Aktivitas:**
-- Handling missing values
-- Removing duplicates
-- Handling outliers
-- Data type conversion
-**Contoh:**
-```
-Missing Values:
-- Fitur 'age' memiliki 50 missing values (5% dari data)
-- Strategi: Imputasi dengan median karena distribusi skewed
-- Alasan: Median lebih robust terhadap outliers dibanding mean
-```
+Proses pemeriksaan dan penyiapan data yang tercatat pada notebook adalah sebagai berikut.
 
-**[Jelaskan langkah-langkah data cleaning yang Anda lakukan]**
+1. **Pemeriksaan missing values:** Dilakukan dengan `df.isnull().sum().sum()`. Hasilnya 0, sehingga tidak diperlukan imputasi nilai kosong.
+2. **Pemeriksaan duplikat:** Dilakukan dengan `df.duplicated().sum()`. Hasilnya 0, sehingga tidak ada baris duplikat yang perlu dihapus.
+3. **Pemeriksaan tipe data:** Seluruh 22 kolom sudah berupa tipe numerik, yaitu 21 kolom `int64` dan satu kolom `float64`. Tidak diperlukan konversi tipe data untuk proses yang tercatat.
+4. **Penanganan outlier:** Belum dilakukan karena notebook belum memuat pemeriksaan maupun hasil deteksi outlier. Penanganannya perlu ditentukan setelah pemeriksaan, bukan dengan menghapus nilai secara otomatis.
+
+Dengan hasil tersebut, data tidak memerlukan imputasi missing values maupun penghapusan duplikat. Akan tetapi, pemeriksaan outlier dan validitas rentang nilai masih menjadi pekerjaan lanjutan yang perlu dilakukan sebelum pemodelan.
+
 
 ### 5.2 Feature Engineering
-**Aktivitas:**
-- Creating new features
-- Feature extraction
-- Feature selection
-- Dimensionality reduction
 
-**[Jelaskan feature engineering yang Anda lakukan]**
+Feature engineering yang dilakukan adalah membentuk fitur target baru bernama `RiskLevel` dari kolom `FloodProbability`. Pembentukan kelas menggunakan batas berikut:
+
+| Rentang `FloodProbability` | Label `RiskLevel` |
+|---|---|
+| `(0,00; 0,45]` | Rendah |
+| `(0,45; 0,55]` | Sedang |
+| `(0,55; 1,00]` | Tinggi |
+
+Implementasi pada notebook:
+
+```python
+bins = [0.0, 0.45, 0.55, 1.0]
+labels = ['Rendah', 'Sedang', 'Tinggi']
+df['RiskLevel'] = pd.cut(
+    df['FloodProbability'],
+    bins=bins,
+    labels=labels
+)
+
+X = df.drop(columns=['id', 'FloodProbability', 'RiskLevel'])
+y = df['RiskLevel']
+```
+
+Penggunaan `pd.cut()` dengan tiga interval tersebut mengubah target probabilitas numerik menjadi target kategorikal tiga kelas. Selanjutnya, `id` dihapus karena hanya merupakan identitas data, sedangkan `FloodProbability` dihapus dari fitur karena menjadi dasar pembentukan label. Langkah ini mencegah model memperoleh nilai yang secara langsung digunakan untuk membentuk target.
 
 ### 5.3 Data Transformation
 
-**Untuk Data Tabular:**
-- Encoding (Label Encoding, One-Hot Encoding, Ordinal Encoding)
-- Scaling (Standardization, Normalization, MinMaxScaler)
+Dataset merupakan data tabular dengan seluruh fitur masukan bertipe numerik. Transformasi yang relevan dan tercatat pada notebook adalah:
 
-**Untuk Data Text:**
-- Tokenization
-- Lowercasing
-- Removing punctuation/stopwords
-- Stemming/Lemmatization
-- Padding sequences
-- Word embedding (Word2Vec, GloVe, fastText)
+1. **Pemisahan fitur dan target:** `X` berisi fitur prediktor setelah kolom `id`, `FloodProbability`, dan `RiskLevel` dikeluarkan. `y` berisi label `RiskLevel`.
+2. **Encoding target:** `RiskLevel` merupakan kategori berurutan secara konseptual (Rendah, Sedang, Tinggi). Notebook mempertahankannya sebagai label kategorikal dan belum menunjukkan proses encoding eksplisit menjadi angka. Encoding dapat dilakukan pada tahap pemodelan sesuai kebutuhan algoritma.
+3. **Scaling fitur:** Cell terakhir notebook menjalankan `scaler.fit_transform(X_train)` dan `scaler.transform(X_val)`. Artinya, scaler dipasang pada data training lalu diterapkan ke validation agar statistik validation tidak ikut digunakan saat fitting. Namun, definisi/import dan jenis `scaler` tidak tercantum pada cell notebook yang diberikan, sehingga jenis scaling yang digunakan belum dapat dipastikan dan kode perlu dilengkapi agar dapat direproduksi.
+4. **Tokenisasi dan augmentasi:** Tidak diperlukan karena dataset bukan data teks maupun citra.
 
-**Untuk Data Image:**
-- Resizing
-- Normalization (pixel values 0-1 atau -1 to 1)
-- Data augmentation (rotation, flip, zoom, brightness, etc.)
-- Color space conversion
-
-**Untuk Time Series:**
-- Creating time windows
-- Lag features
-- Rolling statistics
-- Differencing
-
-**[Jelaskan transformasi yang Anda lakukan]**
+Scaling penting terutama bagi algoritma yang sensitif terhadap perbedaan skala fitur. Untuk memastikan tidak terjadi data leakage, scaler harus selalu di-fit hanya menggunakan data training, kemudian digunakan untuk mentransformasi validation dan test.
 
 ### 5.4 Data Splitting
 
-**Strategi pembagian data:**
-```
-- Training set: [X]% ([jumlah] samples)
-- Validation set: [X]% ([jumlah] samples) - jika ada
-- Test set: [X]% ([jumlah] samples)
-```
-**Contoh:**
-```
-Menggunakan stratified split untuk mempertahankan distribusi kelas:
-- Training: 80% (8000 samples)
-- Test: 20% (2000 samples)
-- Random state: 42 untuk reproducibility
+Notebook telah menerapkan pembagian data menjadi training dan validation dengan `train_test_split`, menggunakan stratifikasi agar proporsi kelas pada kedua subset tetap mendekati distribusi awal.
+
+```python
+from sklearn.model_selection import train_test_split
+
+X_train, X_val, y_train, y_val = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y
+)
 ```
 
-> **Penting:** Test set hanya digunakan **sekali** pada tahap P (evaluasi akhir). Tuning pada tahap O hanya boleh memakai validation set / cross-validation. Fit scaler/encoder hanya pada data training untuk menghindari data leakage.
+Hasil pembagian pada notebook:
 
-**[Jelaskan strategi splitting Anda dan alasannya]**
+| Subset | Proporsi | Jumlah Sampel |
+|---|---:|---:|
+| Training | 80% | 894.365 |
+| Validation | 20% | 223.592 |
+| Test | Belum dibuat | Belum tersedia |
+| **Total** | **100%** | **1.117.957** |
+
+`random_state=42` digunakan agar pembagian data dapat direproduksi. Parameter `stratify=y` mempertahankan proporsi kelas Rendah, Sedang, dan Tinggi pada training dan validation.
+
 
 ### 5.5 Data Balancing (jika diperlukan)
-**Teknik yang digunakan:**
-- SMOTE (Synthetic Minority Over-sampling Technique)
-- Random Undersampling
-- Class weights
-- Ensemble sampling
 
-**[Jelaskan jika Anda melakukan data balancing]**
+Hasil distribusi target menunjukkan ketidakseimbangan kelas: Rendah 15,22%, Sedang 67,49%, dan Tinggi 17,29%. Meskipun demikian, notebook belum menerapkan teknik balancing seperti SMOTE atau Random Undersampling.
+
+Balancing belum dapat dinyatakan telah dilakukan. Jika hasil pelatihan menunjukkan model kurang mampu mengenali kelas minoritas, balancing dapat dipertimbangkan. Teknik seperti SMOTE atau Random Undersampling hanya boleh diterapkan pada data training, bukan validation maupun test, untuk menghindari kebocoran informasi. Alternatif lainnya adalah menggunakan `class_weight` pada algoritma yang mendukungnya.
 
 ### 5.6 Ringkasan Data Preparation
 
 **Per langkah, jelaskan:**
-1. **Apa** yang dilakukan
-**[Jelaskan ]**
-2. **Mengapa** penting
-**[Jelaskan Mengapa ?]**
-3. **Bagaimana** implementasinya
-**[Jelaskan Bagaimana]**
+1. **Apa yang dilakukan**
+
+- Memeriksa kualitas dataset, termasuk missing values, duplikasi, dan tipe data.
+- Membentuk target klasifikasi `RiskLevel` menjadi tiga kelas: Rendah, Sedang, dan Tinggi, berdasarkan nilai `FloodProbability`.
+- Memisahkan fitur (`X`) dan target (`y`), serta menghapus kolom `id` dan `FloodProbability` dari fitur prediktor.
+- Melakukan splitting training-validation sebesar 80:20 menggunakan stratifikasi dan `random_state=42`.
+- Menjalankan scaling dengan fitting pada training dan transformasi pada validation. Jenis scaler perlu dipastikan kembali karena definisinya belum tercantum pada notebook.
+- Belum melakukan balancing dan belum membentuk test set.
+
+2. **Mengapa penting**
+
+Pemeriksaan kualitas data diperlukan untuk memastikan data tidak memiliki nilai kosong atau baris duplikat yang dapat mengganggu proses pembelajaran. Pembentukan `RiskLevel` diperlukan karena tujuan proyek adalah klasifikasi tiga kelas, bukan memprediksi nilai probabilitas secara langsung. Pemisahan fitur dan target mencegah informasi pembentuk label masuk kembali sebagai prediktor. Stratified splitting membantu menjaga distribusi kelas pada subset data, sedangkan scaling membantu menyamakan skala fitur untuk algoritma yang membutuhkannya. Balancing perlu dipertimbangkan karena distribusi kelas tidak merata, tetapi penerapannya harus dibatasi pada training set.
+
+3. **Bagaimana implementasinya**
+
+Pemeriksaan dilakukan menggunakan fungsi pandas `isnull()`, `duplicated()`, dan `dtypes`. Target dibuat menggunakan `pd.cut()` dengan batas `[0.0, 0.45, 0.55, 1.0]` dan label `Rendah`, `Sedang`, serta `Tinggi`. Fitur dan target dipisahkan menggunakan `drop()` dan pemilihan kolom `RiskLevel`. Pembagian data dilakukan menggunakan `train_test_split(test_size=0.2, random_state=42, stratify=y)`. Scaling pada notebook dijalankan dengan `fit_transform()` untuk training dan `transform()` untuk validation. Sebelum masuk tahap modeling, proses perlu dilengkapi dengan splitting tiga subset (training, validation, dan test), memastikan definisi scaler tersedia, serta mengevaluasi kebutuhan balancing berdasarkan performa model pada data validation.
 
 ---
 
