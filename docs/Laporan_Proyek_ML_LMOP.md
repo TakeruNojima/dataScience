@@ -336,7 +336,7 @@ Performa awal model baseline masih berada di sekitar ~0.49–0.53 pada data fitu
 
 **Nama Model:** Random Forest Classifier
 **Teori Singkat:**  
-Random Forest adalah algoritma ensemble learning berbasis bagging (Bootstrap Aggregating) yang membangun sejumlah pohon keputusan (Decision Trees / CART) secara independen dari sampel bootstrap data latih. Pada setiap percabangan (node split), model memilih subset fitur secara acak (max_features='sqrt') lalu menentukan titik pemisah terbaik (misalnya berdasarkan Gini impurity). Untuk tugas klasifikasi, prediksi akhir diperoleh melalui majority voting (suara terbanyak) dari seluruh pohon:$$\hat{y} = \text{mode}\{T_1(\mathbf{x}), T_2(\mathbf{x}), \dots, T_B(\mathbf{x})\}$$
+Random Forest adalah algoritma ensemble learning berbasis bagging (Bootstrap Aggregating) yang membangun sejumlah pohon keputusan (Decision Trees / CART) secara independen dari sampel bootstrap data latih. Pada setiap percabangan (node split), model memilih subset fitur secara acak (max_features='sqrt') lalu menentukan titik pemisah terbaik (misalnya berdasarkan Gini impurity). Untuk tugas klasifikasi, prediksi akhir diperoleh melalui majority voting (suara terbanyak) dari seluruh pohon
 
 **Alasan Pemilihan:**  
 Random Forest dipilih sebagai model advanced karena mampu memodelkan hubungan non-linear dan interaksi antarvariabel hidrometeorologi, topografi, serta kondisi lahan (Rainfall (mm), River Discharge (m³/s), Water Level (m), Elevation (m), Land Cover, dan Soil Type) pada data tabular flood_risk_dataset_india.csv tanpa memerlukan rekayasa fitur interaksi secara manual.
