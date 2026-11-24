@@ -334,38 +334,47 @@ Performa awal model baseline masih berada di sekitar ~0.49–0.53 pada data fitu
 
 #### 6.2.1 Deskripsi Model  **[M]**
 
-**Nama Model:** [Nama model, misal: Random Forest / XGBoost]  
+**Nama Model:** Random Forest Classifier
 **Teori Singkat:**  
-[Jelaskan bagaimana algoritma ini bekerja]
+Random Forest adalah algoritma ensemble learning berbasis bagging (Bootstrap Aggregating) yang membangun sejumlah pohon keputusan (Decision Trees / CART) secara independen dari sampel bootstrap data latih. Pada setiap percabangan (node split), model memilih subset fitur secara acak (max_features='sqrt') lalu menentukan titik pemisah terbaik (misalnya berdasarkan Gini impurity). Untuk tugas klasifikasi, prediksi akhir diperoleh melalui majority voting (suara terbanyak) dari seluruh pohon:$$\hat{y} = \text{mode}\{T_1(\mathbf{x}), T_2(\mathbf{x}), \dots, T_B(\mathbf{x})\}$$
 
 **Alasan Pemilihan:**  
-[Mengapa memilih model ini?]
+Random Forest dipilih sebagai model advanced karena mampu memodelkan hubungan non-linear dan interaksi antarvariabel hidrometeorologi, topografi, serta kondisi lahan (Rainfall (mm), River Discharge (m³/s), Water Level (m), Elevation (m), Land Cover, dan Soil Type) pada data tabular flood_risk_dataset_india.csv tanpa memerlukan rekayasa fitur interaksi secara manual.
 
 **Keunggulan:**
-- [Sebutkan keunggulan]
+- Mampu menangkap pola non-linear dan interaksi kompleks antarfitur secara otomatis.
+- Mengurangi varians dan risiko overfitting dibanding satu pohon keputusan tunggal melalui agregasi banyak pohon.
+- Relatif tahan terhadap outlier dan tidak bergantung pada skala fitur numerik saat melakukan pemisahan (split).
 
 **Kelemahan:**
-- [Sebutkan kelemahan]
+- Interpretabilitas keputusan per sampel lebih sulit dibanding model linear seperti Logistic Regression.
+- Membutuhkan memori dan waktu komputasi/inferensi lebih besar karena menyimpan banyak pohon.
+- Tidak mampu melakukan ekstrapolasi nilai di luar rentang data latih.
 
 #### 6.2.2 Hypothesis Space & Inductive Bias  **[M]**
 
-- **Model family / arsitektur:** [misal: ensemble pohon keputusan]
-- **Hypothesis space:** [fungsi non-linear piecewise, interaksi fitur otomatis, dll.]
-- **Inductive bias / asumsi:** [misal: data tabular dengan struktur ambang/threshold]
-- **Perbandingan dengan baseline:** [apa yang bisa dipelajari model ini yang tidak bisa baseline?]
+- **Model family / arsitektur:** Ensemble pohon keputusan (bagged decision trees / CART).
+- **Hypothesis space:** Himpunan fungsi tangga (piecewise constant functions) yang terbentuk dari gabungan wilayah partisi berbentuk hiper-persegi panjang (axis-aligned hyper-rectangles) pada ruang fitur $\mathbb{R}^d$.
+- **Inductive bias / asumsi:** Mengasumsikan batas keputusan dapat didekati lewat pemotongan tegak lurus terhadap sumbu fitur tunggal ($x_j \le \theta$), data dalam wilayah partisi yang sama cenderung memiliki label yang serupa, dan rata-rata dari banyak pohon memberikan generalisasi yang lebih stabil.
+- **Perbandingan dengan baseline:** Berbeda dengan Logistic Regression yang terbatas pada batas keputusan linear (hyperplane) dan hubungan aditif pada log-odds, Random Forest dapat mempelajari batas keputusan non-linear berbentuk bertingkat serta interaksi antarfitur (seperti kombinasi curah hujan tinggi, debit sungai besar, dan kondisi lahan/tanah tertentu) pada flood_risk_dataset_india.csv.
 
 #### 6.2.3 Implementasi (Ringkas)  **[M]**
 ```python
-# Contoh kode
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.pipeline import Pipeline
 
-model_advanced = RandomForestClassifier(
-    n_estimators=100,
-    max_depth=10,
-    random_state=42
-)
+model_advanced = Pipeline([
+    ('preprocessor', preprocessor),
+    ('classifier', RandomForestClassifier(
+        n_estimators=100,
+        random_state=42,
+        n_jobs=-1
+    ))
+])
+
 model_advanced.fit(X_train, y_train)
-y_pred_advanced = model_advanced.predict(X_test)
+y_val_pred_rf = model_advanced.predict(X_val)
+y_val_prob_rf = model_advanced.predict_proba(X_val)[:, 1]
 ```
 
 #### 6.2.4 Optimization: Hyperparameter Tuning  **[O]**
