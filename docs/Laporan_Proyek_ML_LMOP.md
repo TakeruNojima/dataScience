@@ -4,14 +4,14 @@
 
 **Nama Mahasiswa:** [Takeru Putra Nojima - Satrio yunan wicaksono]  
 **NIM:** [244311029 - 244311027]  
-**Program Studi:** [Rekayasa Perangkat Lunak]  
-**Mata Kuliah:** [Data Science]  
-**Dosen Pengampu:** [Nama Dosen]  
-**Tahun Akademik:** [Tahun/Semester]  
+**Program Studi:** Teknologi Rekayasa Perangkat Lunak  
+**Mata Kuliah:** Data Science  
+**Dosen Pengampu:** Gus Nanang Syaifuddiin S.Kom, M.Kom  
+**Tahun Akademik:** 2026/Semester 5  
 **Link GitHub Repository:** [https://github.com/TakeruNojima/dataScience]  
 **Link Video Pembahasan:** [URL Video (YouTube/Drive)]  
 **SDG yang Dipilih:** SDG - 11 - Kota dan Permukiman yang Berkelanjutan dan SDG - 13 - Penanganan Perubahan Iklim
-**Target SDG yang Relevan:** [misal: Target 13.1 Memperkuat ketahanan dan kapasitas adaptasi terhadap bahaya terkait iklim dan bencana alam]
+**Target SDG yang Relevan:** Target 11.5 (Mengurangi dampak buruk bencana alam) dan Target 13.1 (Memperkuat ketahanan dan kapasitas adaptasi terhadap bahaya terkait iklim dan bencana alam)
 
 ---
 
@@ -31,8 +31,7 @@ Laporan ini disusun mengikuti **ML Lifecycle** yang terdiri dari empat tahap ber
           ▲                                                                   │
           └─────────────── iterasi / perbaikan berdasarkan hasil evaluasi ────┘
 ```
-
-**Catatan untuk mahasiswa:** Setiap bagian diberi label **[L]**, **[M]**, **[O]**, atau **[P]**. Pastikan Anda dapat menjelaskan keterkaitan antar tahap, misalnya bagaimana hasil **P** mendorong perbaikan pada **L/M/O** (Bab 7.5).
+.
 
 ---
 
@@ -56,318 +55,210 @@ Pada proyek ini, mahasiswa diharapkan dapat:
 ## 2. PROJECT OVERVIEW  **[L]**
 
 ### 2.1 Latar Belakang
-**Isi bagian ini dengan:**
 Bencana banjir merupakan salah satu masalah hidrometeorologi yang paling sering terjadi dan menimbulkan kerugian besar terhadap infrastruktur, ekonomi, serta keselamatan jiwa manusia. Di banyak wilayah, banjir sering datang secara mendadak akibat kombinasi curah hujan ekstrem dan kondisi topografi atau ketinggian tanah yang rendah. Oleh karena itu, pembangunan sistem peringatan dini berbasis teknologi sangat penting untuk mendeteksi potensi bahaya lebih awal sehingga mitigasi dan evakuasi dapat dilakukan secara terarah. Proyek ini bermanfaat bagi masyarakat luas, instansi penanggulangan bencana, serta peneliti dalam merancang strategi pencegahan dampak banjir secara proaktif.
 
 Penelitian terkait pemodelan bencana dan hidrologi didukung oleh berbagai literatur ilmiah, salah satunya mengenai pemanfaatan pendekatan komputasi cerdas dalam mengenali pola data lingkungan:
 
-    Goodfellow, I., Bengio, Y., & Courville, A. (2016). Deep Learning. MIT Press.
+> Goodfellow, I., Bengio, Y., & Courville, A. (2016). *Deep Learning*. MIT Press.
 
 Permasalahan ini selaras langsung dengan SDG 11 (Kota dan Permukiman yang Berkelanjutan) dan SDG 13 (Penanganan Perubahan Iklim), di mana pemanfaatan teknologi analitik data iklim dan topografi dapat meningkatkan ketahanan kota terhadap bencana alam.
 
 ### 2.2 Keterkaitan dengan SDGs (WAJIB)
 
-Ide proyek **berasal dari mahasiswa** dan harus selaras dengan **salah satu** dari 17 Sustainable Development Goals (daftar dan contoh inspirasi ada di Lampiran A).
-
 | Komponen | Pertanyaan Panduan | Jawaban Anda |
 |----------|--------------------|--------------|
-| **SDG yang dipilih** | Goal nomor berapa dan apa namanya? | [ SDG 11: Kota dan Permukiman yang Berkelanjutan (Sustainable Cities and Communities) & SDG 13: Penanganan Perubahan Iklim ] |
-| **Target SDG** | Target (misal 3.4, 13.1) mana yang paling relevan? | [ Target 11.5 (Mengurangi dampak buruk bencana alam) dan Target 13.1 (Memperkuat kapasitas adaptasi terhadap bencana iklim) ] |
-| **Masalah nyata** | Masalah konkret apa yang diangkat? Siapa yang terdampak? | [ Tingginya risiko banjir akibat curah hujan tinggi di wilayah bertopografi rendah yang mengancam keselamatan warga dan merusak fasilitas umum. ] |
-| **Peran ML** | Mengapa ML/DL cocok? Apa keputusan atau proses yang dibantu? | [ ML/DL mampu memproses pola hubungan non-linear yang kompleks antara curah hujan dan ketinggian wilayah untuk mengotomatisasi klasifikasi tingkat risiko banjir secara akurat. ] |
-| **Indikator kontribusi** | Bagaimana hasil model berkontribusi pada target SDG (langsung/tidak langsung)? | [ Memberikan peringatan dini berbasis data bagi warga dan pihak berwenang untuk mengambil tindakan mitigasi sebelum bencana terjadi. ] |
-| **Pertimbangan etika** | Risiko bias, privasi, atau dampak salah prediksi? | [ Risiko False Negative (wilayah rawan diprediksi aman) sangat berbahaya bagi keselamatan; serta potensi bias data jika sampel wilayah kurang seimbang. Tidak melibatkan data privat penduduk. ] |
+| **SDG yang dipilih** | Goal nomor berapa dan apa namanya? |  SDG 11: Kota dan Permukiman yang Berkelanjutan (Sustainable Cities and Communities) & SDG 13: Penanganan Perubahan Iklim  |
+| **Target SDG** | Target (misal 3.4, 13.1) mana yang paling relevan? |  Target 11.5 (Mengurangi dampak buruk bencana alam) dan Target 13.1 (Memperkuat kapasitas adaptasi terhadap bencana iklim)  |
+| **Masalah nyata** | Masalah konkret apa yang diangkat? Siapa yang terdampak? |  Tingginya risiko banjir akibat curah hujan tinggi di wilayah bertopografi rendah yang mengancam keselamatan warga dan merusak fasilitas umum.  |
+| **Peran ML** | Mengapa ML/DL cocok? Apa keputusan atau proses yang dibantu? |  ML/DL mampu memproses pola hubungan non-linear yang kompleks antara curah hujan dan ketinggian wilayah untuk mengotomatisasi klasifikasi tingkat risiko banjir secara akurat.  |
+| **Indikator kontribusi** | Bagaimana hasil model berkontribusi pada target SDG (langsung/tidak langsung)? |  Memberikan peringatan dini berbasis data bagi warga dan pihak berwenang untuk mengambil tindakan mitigasi sebelum bencana terjadi.  |
+| **Pertimbangan etika** | Risiko bias, privasi, atau dampak salah prediksi? |  Risiko False Negative (wilayah rawan diprediksi aman) sangat berbahaya bagi keselamatan; serta potensi bias data jika sampel wilayah kurang seimbang. Tidak melibatkan data privat penduduk.  |
 
 **Sumber ide:** Diangkat dari isu nyata tingginya banjir musiman di berbagai wilayah Indonesia (seperti Jakarta dan Semarang) akibat curah hujan ekstrem, penurunan muka tanah, serta alih fungsi lahan, yang menuntut sistem mitigasi bencana berbasis data iklim.
 
 ### 2.3 Ringkasan Alur Lifecycle Proyek
-Jelaskan dalam 1 paragraf pendek bagaimana proyek Anda melewati tahap L → M → O → P (dan iterasi apa yang direncanakan).
 
-**[Tulis ringkasan alur lifecycle proyek Anda]**
-
-Proyek ini dimulai dari tahap Learning Problem (L) dengan merumuskan tujuan prediksi risiko banjir dan memahami struktur dataset tabular dari Kaggle. Selanjutnya, data dibersihkan dan disiapkan, disusul dengan tahap Model Design (M) dan Optimization (O) untuk melatih model baseline, advanced (Random Forest/XGBoost), hingga deep learning (MLP). Tahap terakhir adalah Predict & Evaluate (P) untuk menguji performa model pada test set, melakukan analisis kesalahan, serta melakukan iterasi perbaikan jika diperlukan.
+Proyek ini dimulai dari tahap **Learning Problem (L)** dengan merumuskan tujuan prediksi risiko kejadian banjir dan memahami struktur dataset tabular `flood_risk_dataset_india.csv` dari Kaggle (10.000 baris dan 14 kolom). Selanjutnya, data dibersihkan, fitur kategorikal di-*encode*, dan dilakukan *feature scaling* pada tahap Data Preparation, disusul dengan tahap **Model Design (M)** dan **Optimization (O)** untuk melatih model *baseline*, *advanced* (Random Forest/XGBoost), hingga *deep learning* (MLP). Tahap terakhir adalah **Predict & Evaluate (P)** untuk menguji performa model pada *test set*, melakukan analisis kesalahan (*error analysis*), serta melakukan iterasi perbaikan jika diperlukan.
 
 ## 3. BUSINESS UNDERSTANDING / PROBLEM UNDERSTANDING  **[L]**
 
 ### 3.1 Problem Statements
-Tuliskan 2–4 pernyataan masalah yang jelas dan spesifik.
 
-**Contoh (universal):**
-1. Model perlu mampu memprediksi nilai target dengan akurasi tinggi
-2. Sistem harus dapat mengidentifikasi pola pada citra secara otomatis
-3. Dataset memiliki noise sehingga perlu preprocessing yang tepat
-4. Dibutuhkan model deep learning yang mampu belajar representasi fitur kompleks
-
-**[Tulis problem statements Anda di sini]**
-
-1. Tingginya variasi faktor lingkungan seperti intensitas curah hujan dan ketinggian wilayah menuntut model untuk mampu memprediksi tingkat risiko banjir dengan akurasi dan ketepatan yang tinggi.
-2. Dataset mentah dari sumber publik sering kali mengandung noise, nilai yang hilang (missing values), atau rentang skala fitur yang tidak seragam sehingga memerlukan proses data preprocessing dan pembersihan yang teliti.
-3. Hubungan antara kondisi topografi dan kerentanan banjir bersifat non-linear, sehingga diperlukan perbandingan performa antara model machine learning konvensional dan deep learning untuk menemukan arsitektur yang paling optimal.
+1. Tingginya variasi faktor hidrometeorologi dan lingkungan seperti intensitas curah hujan (`Rainfall`), debit sungai (`River Discharge`), tinggi muka air (`Water Level`), dan ketinggian wilayah (`Elevation`) menuntut model untuk mampu memprediksi risiko kejadian banjir dengan akurasi dan ketepatan yang tinggi.
+2. Dataset tabular mentah mengandung kombinasi fitur numerik dengan rentang skala yang sangat berbeda (misalnya kepadatan penduduk hingga ribuan jiwa dibandingkan tinggi muka air dalam satuan meter) serta fitur kategorikal (`Land Cover` dan `Soil Type`), sehingga memerlukan proses *encoding* dan *feature scaling* yang tepat tanpa kebocoran data (*data leakage*).
+3. Hubungan antara kondisi cuaca, topografi, dan kerentanan banjir bersifat non-linear, sehingga diperlukan perbandingan performa antara model *machine learning* konvensional dan *deep learning* untuk menemukan arsitektur yang paling optimal.
 
 ### 3.2 Formulasi Learning Problem (WAJIB)
 
-Rumuskan masalah dalam kerangka *Learning Problem*:
-
 | Komponen | Pertanyaan Panduan | Jawaban Anda |
 |----------|--------------------|--------------|
-| **Target** | Apa yang diprediksi? Jenis tugas (klasifikasi biner/multikelas, regresi, forecasting, clustering, dll.)? | [ Memprediksi tingkat Risiko Banjir (Klasifikasi Biner/Multikelas: Rendah, Sedang, Tinggi) ] |
-| **Objective** | Apa yang dioptimalkan/diminimalkan secara matematis (misal: cross-entropy, MSE)? Metrik keberhasilan utama? | [ Meminimalkan cross-entropy loss (kesalahan klasifikasi), dengan metrik utama berupa F1-Score dan Recall untuk menghindari kesalahan prediksi wilayah berbahaya. ] |
-| **Data** | Sumber, ukuran, jenis, dan asumsi tentang data (i.i.d.? distribusi train vs test?) | [ Dataset tabular dari Kaggle (Flood Prediction Dataset), berisi ribuan baris data fitur curah hujan, ketinggian, dan lingkungan berformat CSV. ] |
+| **Target** | Apa yang diprediksi? Jenis tugas (klasifikasi biner/multikelas, regresi, dll.)? | Memprediksi kejadian risiko banjir pada kolom **`Flood Occurred`** menggunakan tugas **Klasifikasi Biner** (`0` = Tidak Terjadi Banjir, `1` = Terjadi Banjir). |
+| **Objective** | Apa yang dioptimalkan/diminimalkan secara matematis? Metrik keberhasilan utama? | Meminimalkan **Binary Cross-Entropy Loss** (*log-loss*), dengan metrik evaluasi utama berupa **F1-Score**, **Recall**, dan **ROC-AUC** untuk meminimalkan keterjadian *False Negative*. |
+| **Data** | Sumber, ukuran, jenis, dan asumsi tentang data? | Dataset tabular Kaggle (`flood_risk_dataset_india.csv`), berisi **10.000 baris** dan **14 kolom** (berukuran **1,77 MB**, format CSV) yang diasumsikan *independent and identically distributed* (i.i.d.). |
 
 ### 3.3 Goals
 
-Tujuan harus spesifik, terukur, dan selaras dengan problem statement.
-**Contoh tujuan:**
-1. Membangun model ML untuk memprediksi variabel target dengan akurasi > 80%
-2. Mengukur performa tiga pendekatan model (baseline, advanced, deep learning)
-3. Menentukan model terbaik berdasarkan metrik evaluasi yang relevan
-4. Menghasilkan sistem yang dapat bekerja secara reproducible
-
-> Sertakan minimal satu goal yang menunjukkan kontribusi terhadap target SDG yang dipilih (Bab 2.2).
-
-**[Tulis goals Anda di sini]**
+1. Membangun model pemelajaran mesin untuk memprediksi tingkat risiko kejadian banjir (`Flood Occurred`) dengan metrik F1-Score dan ROC-AUC di atas 80%.
+2. Mengukur dan membandingkan performa tiga pendekatan pemodelan (Baseline: Logistic Regression, Advanced: Random Forest/XGBoost, Deep Learning: Multilayer Perceptron).
+3. Menentukan model terbaik berbasis penanganan komprehensif terhadap fitur hidrometeorologi dan topografi.
+4. Menghasilkan alur kerja pemrosesan data dan pemodelan yang dapat direproduksi penuh (100% *reproducible*).
+5. Memberikan kontribusi nyata terhadap target SDG 11.5 dan SDG 13.1 melalui penyediaan landasan sistem peringatan dini bencana berbasis data.
 
 ### 3.4 Solution Approach  **[M]**
 
-Mahasiswa **WAJIB** menggunakan minimal **tiga model** dengan komposisi sebagai berikut:
 #### **Model 1 – Baseline Model**
-Model sederhana sebagai pembanding dasar.
-**Pilihan model:**
-- Linear Regression (untuk regresi)
-- Logistic Regression (untuk klasifikasi)
-- K-Nearest Neighbors (KNN)
-- Decision Tree
-- Naive Bayes
-
-**[Jelaskan model baseline yang Anda pilih dan alasannya]**
+- **Model yang dipilih:** **Logistic Regression**
+- **Alasan Pemilihan:** Logistic Regression dipilih sebagai model acuan dasar (*baseline*) karena kesederhanaannya, kecepatan komputasi yang tinggi, dan sifatnya yang mudah diinterpretasikan secara matematis untuk masalah klasifikasi biner.
 
 #### **Model 2 – Advanced / ML Model**
-Model machine learning yang lebih kompleks.
-**Pilihan model:**
-- Random Forest
-- Gradient Boosting (XGBoost, LightGBM, CatBoost)
-- Support Vector Machine (SVM)
-- Ensemble methods
-- Clustering (K-Means, DBSCAN) - untuk unsupervised
-- PCA / dimensionality reduction (untuk preprocessing)
-
-**[Jelaskan model advanced yang Anda pilih dan alasannya]**
+- **Model yang dipilih:** **Random Forest Classifier / XGBoost**
+- **Alasan Pemilihan:** Random Forest / XGBoost merupakan algoritma *ensemble* berbasis pohon keputusan yang mampu memodelkan hubungan non-linear kompleks dan interaksi antar fitur (seperti kombinasi curah hujan tinggi dan elevasi rendah) tanpa memerlukan asumsi distribusi data linear.
 
 #### **Model 3 – Deep Learning Model (WAJIB)**
-Model deep learning yang sesuai dengan jenis data.
-**Pilihan Implementasi (pilih salah satu sesuai dataset):**
-**A. Tabular Data:**
-- Multilayer Perceptron (MLP) / Neural Network
-- Minimum: 2 hidden layers
-- Contoh: prediksi harga, klasifikasi binary/multiclass
-
-**B. Image Data:**
-- CNN sederhana (minimum 2 convolutional layers) **ATAU**
-- Transfer Learning (ResNet, VGG, MobileNet, EfficientNet) - **recommended**
-- Contoh: klasifikasi gambar, object detection
-
-**C. Text Data:**
-- LSTM/GRU (minimum 1 layer) **ATAU**
-- Embedding + Dense layers **ATAU**
-- Pre-trained model (BERT, DistilBERT, Word2Vec)
-- Contoh: sentiment analysis, text classification
-
-**D. Time Series:**
-- LSTM/GRU untuk sequential prediction
-- Contoh: forecasting, anomaly detection
-
-**E. Recommender Systems:**
-- Neural Collaborative Filtering (NCF)
-- Autoencoder-based Collaborative Filtering
-- Deep Matrix Factorization
-
-**Minimum Requirements untuk Deep Learning:**
-- ✅ Model harus training minimal 10 epochs
-- ✅ Harus ada plot loss dan accuracy/metric per epoch
-- ✅ Harus ada hasil prediksi pada test set
-- ✅ Training time dicatat (untuk dokumentasi)
-
-**Tidak Diperbolehkan:**
-- ❌ Copy-paste kode tanpa pemahaman
-- ❌ Model tidak di-train (hanya define arsitektur)
-- ❌ Tidak ada evaluasi pada test set
-
-**[Jelaskan model deep learning yang Anda pilih dan alasannya]**
+- **Model yang dipilih:** **Multilayer Perceptron (MLP)**
+- **Alasan Pemilihan:** Arsitektur neural network MLP dengan minimal 2 *hidden layers*, fungsi aktivasi ReLU, serta *Dropout layer* sangat sesuai untuk mengekstrak representasi fitur berdimensi tinggi pada data tabular dan meminimalkan *Binary Cross-Entropy Loss*.
 
 ---
 
 ## 4. DATA UNDERSTANDING  **[L]**
 ### 4.1 Informasi Dataset
-**Sumber Dataset:**  
-Kaggle – Flood Prediction Dataset (file `train.csv`).
+**Sumber Dataset:** Kaggle – Flood Risk Dataset in India (file `flood_risk_dataset_india.csv`).
 
 **Deskripsi Dataset:**
-- Jumlah baris (rows): 1117957
-- Jumlah kolom (columns/features): 22
-- Tipe data: Tabular
-- Ukuran dataset: 30 MB
-- Format file: CSV
+- Jumlah baris (rows): **10.000**
+- Jumlah kolom (columns/features): **14**
+- Tipe data: **Tabular** (campuran fitur numerik kontinu, biner, dan kategorikal)
+- Ukuran dataset: **1,77 MB** (1.810,85 KB)
+- Format file: **CSV**
 
 ### 4.2 Deskripsi Fitur
-Jelaskan setiap fitur/kolom yang ada dalam dataset.
 
 | Nama Fitur | Tipe Data | Deskripsi |
 |---|---|---|
-| `id` | Integer (`int64`) | Nomor identitas/urutan setiap baris data; tidak digunakan sebagai fitur prediksi. |
-| `MonsoonIntensity` | Integer (`int64`) | Skor intensitas musim monsun. |
-| `TopographyDrainage` | Integer (`int64`) | Skor kondisi topografi yang berkaitan dengan kemampuan drainase wilayah. |
-| `RiverManagement` | Integer (`int64`) | Skor pengelolaan sungai. |
-| `Deforestation` | Integer (`int64`) | Skor kondisi/tingkat deforestasi. |
-| `Urbanization` | Integer (`int64`) | Skor tingkat urbanisasi. |
-| `ClimateChange` | Integer (`int64`) | Skor faktor perubahan iklim. |
-| `DamsQuality` | Integer (`int64`) | Skor kualitas bendungan. |
-| `Siltation` | Integer (`int64`) | Skor sedimentasi atau pendangkalan. |
-| `AgriculturalPractices` | Integer (`int64`) | Skor praktik kegiatan pertanian. |
-| `Encroachments` | Integer (`int64`) | Skor gangguan/penyempitan area sungai atau wilayah terkait. |
-| `IneffectiveDisasterPreparedness` | Integer (`int64`) | Skor ketidakefektifan kesiapsiagaan bencana. |
-| `DrainageSystems` | Integer (`int64`) | Skor kondisi sistem drainase. |
-| `CoastalVulnerability` | Integer (`int64`) | Skor kerentanan wilayah pesisir. |
-| `Landslides` | Integer (`int64`) | Skor faktor kejadian/kerawanan tanah longsor. |
-| `Watersheds` | Integer (`int64`) | Skor kondisi daerah aliran sungai (DAS). |
-| `DeterioratingInfrastructure` | Integer (`int64`) | Skor penurunan/kondisi memburuknya infrastruktur. |
-| `PopulationScore` | Integer (`int64`) | Skor faktor populasi atau kepadatan penduduk. |
-| `WetlandLoss` | Integer (`int64`) | Skor kehilangan lahan basah. |
-| `InadequatePlanning` | Integer (`int64`) | Skor ketidakmemadaian perencanaan wilayah. |
-| `PoliticalFactors` | Integer (`int64`) | Skor faktor politik yang berkaitan dengan pengelolaan risiko. |
-| `FloodProbability` | Float (`float64`) | Nilai probabilitas banjir; digunakan untuk membentuk target klasifikasi `RiskLevel`, bukan sebagai fitur masukan model. |
-
-**[Buat tabel deskripsi fitur Anda di sini]**
+| `Latitude` | Float (`float64`) | Koordinat garis lintang lokasi pengamatan di wilayah India (rentang: $8,00^\circ$ – $36,99^\circ$). |
+| `Longitude` | Float (`float64`) | Koordinat garis bujur lokasi pengamatan di wilayah India (rentang: $68,00^\circ$ – $97,00^\circ$). |
+| `Rainfall (mm)` | Float (`float64`) | Intensitas curah hujan dalam milimeter (rentang: $0,01$ – $299,97\text{ mm}$, rata-rata $150,02\text{ mm}$). |
+| `Temperature (°C)` | Float (`float64`) | Suhu udara permukaan dalam derajat Celsius (rentang: $15,00^\circ\text{C}$ – $44,99^\circ\text{C}$, rata-rata $29,96^\circ\text{C}$). |
+| `Humidity (%)` | Float (`float64`) | Tingkat kelembapan udara relatif dalam persentase (rentang: $20,00\%$ – $100,00\%$, rata-rata $59,75\%$). |
+| `River Discharge (m³/s)` | Float (`float64`) | Debit aliran air sungai dalam meter kubik per detik (rentang: $0,04$ – $4.999,70\text{ m}^3/\text{s}$, rata-rata $2.515,72\text{ m}^3/\text{s}$). |
+| `Water Level (m)` | Float (`float64`) | Ketinggian permukaan air dalam meter (rentang: $0,003$ – $10,00\text{ m}$, rata-rata $5,02\text{ m}$). |
+| `Elevation (m)` | Float (`float64`) | Ketinggian wilayah/topografi di atas permukaan laut dalam meter (rentang: $1,15$ – $8.846,89\text{ m}$, rata-rata $4.417,14\text{ m}$). |
+| `Land Cover` | Object (`object`) | Jenis tutupan lahan di wilayah pengamatan, terdiri dari 5 kategori: `Water Body`, `Desert`, `Forest`, `Agricultural`, dan `Urban`. |
+| `Soil Type` | Object (`object`) | Jenis tanah di wilayah pengamatan yang memengaruhi daya serap air, terdiri dari 5 kategori: `Peat`, `Silt`, `Clay`, `Loam`, dan `Sandy`. |
+| `Population Density` | Float (`float64`) | Kepadatan penduduk di area tersebut (rentang: $2,29$ – $9.999,17$, rata-rata $5.021,47$). |
+| `Infrastructure` | Integer (`int64`) | Indikator ketersediaan infrastruktur pengendali banjir/drainase (`0` = Tidak memadai/tidak ada, `1` = Tersedia/memadai). |
+| `Historical Floods` | Integer (`int64`) | Riwayat kejadian banjir sebelumnya pada lokasi tersebut (`0` = Tidak ada riwayat, `1` = Pernah mengalami banjir). |
+| `Flood Occurred` | Integer (`int64`) | **Variabel target** klasifikasi biner yang menunjukkan terjadinya banjir (`0` = Tidak Terjadi Banjir, `1` = Terjadi Banjir). |
 
 ### 4.3 Kondisi Data
 
-Berdasarkan pemeriksaan yang dijalankan pada notebook, kondisi data yang dapat dipastikan adalah sebagai berikut.
+Berdasarkan pemeriksaan yang dijalankan pada notebook **`01_learning_problem_eda.ipynb`**, kondisi dataset adalah sebagai berikut:
 
-- **Missing Values:** Tidak ditemukan nilai kosong. Hasil `df.isnull().sum().sum()` adalah **0** untuk seluruh dataset.
-- **Duplicate Data:** Tidak ditemukan baris duplikat. Hasil `df.duplicated().sum()` adalah **0**.
-- **Outliers:** Belum dilakukan pemeriksaan outlier menggunakan boxplot, IQR, atau metode statistik lainnya. Oleh sebab itu, belum dapat disimpulkan apakah dataset memiliki outlier.
-- **Imbalanced Data:** Distribusi target hasil pembentukan kelas tidak seimbang. Rinciannya:
+- **Missing Values:** Tidak ditemukan nilai kosong. Hasil pengecekan `df.isnull().sum().sum()` adalah **0** di seluruh 14 kolom.
+- **Duplicate Data:** Tidak ditemukan baris duplikat. Hasil pengecekan `df.duplicated().sum()` adalah **0**.
+- **Outliers:** Berdasarkan pemeriksaan statistik metode *Interquartile Range* (IQR) pada seluruh fitur numerik, ditemukan **0 outlier** di luar batas $Q_1 - 1,5 \times \text{IQR}$ maupun $Q_3 + 1,5 \times \text{IQR}$.
+- **Imbalanced Data:** Distribusi kelas pada variabel target `Flood Occurred` tergolong **seimbang (*balanced*)** dengan rincian:
 
-| Kelas Risiko | Jumlah Data | Persentase |
-|---|---:|---:|
-| Rendah | 170.142 | 15,22% |
-| Sedang | 754.540 | 67,49% |
-| Tinggi | 193.275 | 17,29% |
-| **Total** | **1.117.957** | **100%** |
+| Kelas Target (`Flood Occurred`) | Keterangan | Jumlah Data | Persentase |
+|---|---|---:|---:|
+| `0` | Tidak Terjadi Banjir | 4.943 | 49,43% |
+| `1` | Terjadi Banjir | 5.057 | 50,57% |
+| **Total** | | **10.000** | **100,00%** |
 
 ### 4.4 Exploratory Data Analysis (EDA) - (**OPSIONAL**)
 
-Notebook yang diberikan telah membuat satu visualisasi distribusi kelas risiko menggunakan bar chart (`countplot`). Visualisasi ini menunjukkan bahwa kelas Sedang memiliki jumlah data paling besar.
+Seluruh visualisasi eksplorasi data berikut diimplementasikan pada notebook pertama (**`01_learning_problem_eda.ipynb`**):
 
-#### Visualisasi 1: Distribusi Jumlah Data Berdasarkan Tingkat Risiko Banjir
+#### Visualisasi 1: Distribusi Kejadian Banjir (`Flood Occurred`)
+Visualisasi dilakukan menggunakan `sns.countplot()` pada kolom `Flood Occurred` (dengan label `Tidak Banjir (0)` dan `Terjadi Banjir (1)`).
+- **Insight:** Jumlah sampel untuk kelas `1` (Terjadi Banjir) sebanyak **5.057 baris (50,57%)** dan kelas `0` (Tidak Terjadi Banjir) sebanyak **4.943 baris (49,43%)**. Selisih antar kelas hanya 1,14%, mengonfirmasi bahwa dataset seimbang dan tidak memerlukan teknik re-sampling.
 
-Visualisasi dibuat menggunakan `sns.countplot()` dengan urutan kelas Rendah, Sedang, dan Tinggi.
+#### Visualisasi 2: Kejadian Banjir Berdasarkan Tutupan Lahan (`Land Cover`)
+Visualisasi dilakukan menggunakan `sns.countplot(x='Land Cover', hue='Flood Occurred')` untuk membandingkan proporsi banjir pada 5 jenis tutupan lahan (`Water Body`: 2.046, `Desert`: 2.033, `Forest`: 2.005, `Agricultural`: 1.978, `Urban`: 1.938).
+- **Insight:** Setiap jenis tutupan lahan terdistribusi secara seragam di kisaran 19,38%–20,46% dari keseluruhan data, dengan rasio kejadian banjir yang proporsional pada masing-masing kategori.
 
-**Insight:** Kelas Sedang berjumlah 754.540 data (67,49%), jauh lebih banyak dibandingkan kelas Rendah sebanyak 170.142 data (15,22%) dan kelas Tinggi sebanyak 193.275 data (17,29%). Distribusi ini menunjukkan ketidakseimbangan kelas yang perlu diperhatikan pada proses pelatihan dan evaluasi model.
+#### Visualisasi 3: Distribusi Curah Hujan (`Rainfall (mm)`)
+Visualisasi dilakukan menggunakan `sns.histplot()` dengan kurva KDE pada kolom `Rainfall (mm)`.
+- **Insight:** Curah hujan tersebar merata dari $0,01\text{ mm}$ hingga $299,97\text{ mm}$ dengan rata-rata $150,02\text{ mm}$ dan standar deviasi $86,03\text{ mm}$, menunjukkan sebaran kontinu tanpa tingkat kemencengan (*skewness*) ekstrem.
 
 
 ## 5. DATA PREPARATION  **[L]**
 
-Proses pemeriksaan dan penyiapan data yang tercatat pada notebook adalah sebagai berikut.
+Seluruh rangkaian prapemrosesan data dipisahkan secara modular ke dalam notebook kedua (**`02_data_preparation.ipynb`**) agar alur transformasi fitur siap pakai sebelum tahap pemodelan.
 
-1. **Pemeriksaan missing values:** Dilakukan dengan `df.isnull().sum().sum()`. Hasilnya 0, sehingga tidak diperlukan imputasi nilai kosong.
-2. **Pemeriksaan duplikat:** Dilakukan dengan `df.duplicated().sum()`. Hasilnya 0, sehingga tidak ada baris duplikat yang perlu dihapus.
-3. **Pemeriksaan tipe data:** Seluruh 22 kolom sudah berupa tipe numerik, yaitu 21 kolom `int64` dan satu kolom `float64`. Tidak diperlukan konversi tipe data untuk proses yang tercatat.
-4. **Penanganan outlier:** Belum dilakukan karena notebook belum memuat pemeriksaan maupun hasil deteksi outlier. Penanganannya perlu ditentukan setelah pemeriksaan, bukan dengan menghapus nilai secara otomatis.
-
-Dengan hasil tersebut, data tidak memerlukan imputasi missing values maupun penghapusan duplikat. Akan tetapi, pemeriksaan outlier dan validitas rentang nilai masih menjadi pekerjaan lanjutan yang perlu dilakukan sebelum pemodelan.
-
+### 5.1 Data Cleaning
+1. **Pemeriksaan missing values:** Diverifikasi pada `01_learning_problem_eda.ipynb` menggunakan `df.isnull().sum().sum()`. Hasilnya **0**, tidak membutuhkan imputasi data.
+2. **Pemeriksaan duplikat:** Menggunakan `df.duplicated().sum()`. Hasilnya **0**, seluruh 10.000 sampel data bersifat unik.
+3. **Pemeriksaan tipe data:** Terdapat 12 kolom numerik (`9 float64` dan `3 int64`) serta 2 kolom kategorikal bertipe `object` (`Land Cover` dan `Soil Type`).
+4. **Penanganan outlier:** Evaluasi nilai min-max dan IQR menunjukkan seluruh nilai fitur numerik berada pada rentang fisik wajar, sehingga tidak dilakukan pemotongan data.
 
 ### 5.2 Feature Engineering
-
-Feature engineering yang dilakukan adalah membentuk fitur target baru bernama `RiskLevel` dari kolom `FloodProbability`. Pembentukan kelas menggunakan batas berikut:
-
-| Rentang `FloodProbability` | Label `RiskLevel` |
-|---|---|
-| `(0,00; 0,45]` | Rendah |
-| `(0,45; 0,55]` | Sedang |
-| `(0,55; 1,00]` | Tinggi |
-
-Implementasi pada notebook:
+Pada notebook **`02_data_preparation.ipynb`**, dilakukan pemisahan variabel dan pembentukan fitur *dummy*:
+1. **Pemisahan Fitur (`X`) dan Target (`y`):** Kolom `Flood Occurred` ditetapkan sebagai variabel target (`y`), sedangkan 13 kolom lainnya menjadi fitur prediktor.
+2. **Encoding Fitur Kategorikal:** Fitur `Land Cover` (5 kategori) dan `Soil Type` (5 kategori) diubah menjadi bentuk biner menggunakan **One-Hot Encoding** (`pd.get_dummies(..., drop_first=True)`). Penggunaan `drop_first=True` menghasilkan 8 kolom indikator baru sehingga total matriks `X` memiliki **19 fitur prediktor**.
 
 ```python
-bins = [0.0, 0.45, 0.55, 1.0]
-labels = ['Rendah', 'Sedang', 'Tinggi']
-df['RiskLevel'] = pd.cut(
-    df['FloodProbability'],
-    bins=bins,
-    labels=labels
+# Implementasi pada 02_data_preparation.ipynb
+X = pd.get_dummies(
+    df.drop(columns=['Flood Occurred']),
+    columns=['Land Cover', 'Soil Type'],
+    drop_first=True
 )
+y = df['Flood Occurred']
 
-X = df.drop(columns=['id', 'FloodProbability', 'RiskLevel'])
-y = df['RiskLevel']
+print("Jumlah fitur setelah One-Hot Encoding:", X.shape[1])
+print("\nJumlah data per kategori target (Flood Occurred):")
+print(y.value_counts())
 ```
 
-Penggunaan `pd.cut()` dengan tiga interval tersebut mengubah target probabilitas numerik menjadi target kategorikal tiga kelas. Selanjutnya, `id` dihapus karena hanya merupakan identitas data, sedangkan `FloodProbability` dihapus dari fitur karena menjadi dasar pembentukan label. Langkah ini mencegah model memperoleh nilai yang secara langsung digunakan untuk membentuk target.
 
 ### 5.3 Data Transformation
 
-Dataset merupakan data tabular dengan seluruh fitur masukan bertipe numerik. Transformasi yang relevan dan tercatat pada notebook adalah:
-
-1. **Pemisahan fitur dan target:** `X` berisi fitur prediktor setelah kolom `id`, `FloodProbability`, dan `RiskLevel` dikeluarkan. `y` berisi label `RiskLevel`.
-2. **Encoding target:** `RiskLevel` merupakan kategori berurutan secara konseptual (Rendah, Sedang, Tinggi). Notebook mempertahankannya sebagai label kategorikal dan belum menunjukkan proses encoding eksplisit menjadi angka. Encoding dapat dilakukan pada tahap pemodelan sesuai kebutuhan algoritma.
-3. **Scaling fitur:** Cell terakhir notebook menjalankan `scaler.fit_transform(X_train)` dan `scaler.transform(X_val)`. Artinya, scaler dipasang pada data training lalu diterapkan ke validation agar statistik validation tidak ikut digunakan saat fitting. Namun, definisi/import dan jenis `scaler` tidak tercantum pada cell notebook yang diberikan, sehingga jenis scaling yang digunakan belum dapat dipastikan dan kode perlu dilengkapi agar dapat direproduksi.
-4. **Tokenisasi dan augmentasi:** Tidak diperlukan karena dataset bukan data teks maupun citra.
-
-Scaling penting terutama bagi algoritma yang sensitif terhadap perbedaan skala fitur. Untuk memastikan tidak terjadi data leakage, scaler harus selalu di-fit hanya menggunakan data training, kemudian digunakan untuk mentransformasi validation dan test.
+1. **One-Hot Encoding pada fitur kategorikal:** Mengonversi `Land Cover` dan `Soil Type` menjadi variabel dummy biner numerik.
+2. **Feature Scaling menggunakan `StandardScaler`:** Mengingat perbedaan skala antar variabel (seperti `Elevation` hingga $8.846,89\text{ m}$ dan `Population Density` hingga $9.999,17$ versus `Water Level` $0\text{--}10\text{ m}$), dilakukan pembakuan skala ($z = \frac{x - \mu}{\sigma}$) menggunakan `StandardScaler`.
+3. **Pencegahan Data Leakage:** Proses `fit_transform(X_train)` hanya dilakukan pada subset *training*, kemudian parameter standar ($\mu, \sigma$) yang dihasilkan digunakan untuk mentransformasi `transform(X_val)`
 
 ### 5.4 Data Splitting
-
-Notebook telah menerapkan pembagian data menjadi training dan validation dengan `train_test_split`, menggunakan stratifikasi agar proporsi kelas pada kedua subset tetap mendekati distribusi awal.
+Pada notebook **`02_data_preparation.ipynb`**, dataset dibagi menjadi subset data *training* dan *validation* menggunakan rasio **80:20** dengan `train_test_split` dan penguncian acak (`random_state=42`) serta stratifikasi kelas (`stratify=y`):
 
 ```python
+# Implementasi pada 02_data_preparation_india.ipynb
 from sklearn.model_selection import train_test_split
 
 X_train, X_val, y_train, y_val = train_test_split(
-    X,
-    y,
-    test_size=0.2,
-    random_state=42,
-    stratify=y
+    X, y, test_size=0.2, random_state=42, stratify=y
 )
+
+print(f"Jumlah data training: {X_train.shape[0]}")
+print(f"Jumlah data validation: {X_val.shape[0]}")
 ```
 
-Hasil pembagian pada notebook:
+Hasil pembagian data:
 
-| Subset | Proporsi | Jumlah Sampel |
-|---|---:|---:|
-| Training | 80% | 894.365 |
-| Validation | 20% | 223.592 |
-| Test | Belum dibuat | Belum tersedia |
-| **Total** | **100%** | **1.117.957** |
-
-`random_state=42` digunakan agar pembagian data dapat direproduksi. Parameter `stratify=y` mempertahankan proporsi kelas Rendah, Sedang, dan Tinggi pada training dan validation.
-
+| Subset | Proporsi | Jumlah Sampel | Kelas `0` (Tidak Banjir) | Kelas `1` (Banjir) |
+|---|---:|---:|---:|---:|
+| Training | 80% | 8.000 | 3.954 (49,42%) | 4.046 (50,58%) |
+| Validation | 20% | 2.000 | 989 (49,45%) | 1.011 (50,55%) |
+| **Total** | **100%** | **10.000** | **4.943 (49,43%)** | **5.057 (50,57%)** |
 
 ### 5.5 Data Balancing (jika diperlukan)
-
-Hasil distribusi target menunjukkan ketidakseimbangan kelas: Rendah 15,22%, Sedang 67,49%, dan Tinggi 17,29%. Meskipun demikian, notebook belum menerapkan teknik balancing seperti SMOTE atau Random Undersampling.
-
-Balancing belum dapat dinyatakan telah dilakukan. Jika hasil pelatihan menunjukkan model kurang mampu mengenali kelas minoritas, balancing dapat dipertimbangkan. Teknik seperti SMOTE atau Random Undersampling hanya boleh diterapkan pada data training, bukan validation maupun test, untuk menghindari kebocoran informasi. Alternatif lainnya adalah menggunakan `class_weight` pada algoritma yang mendukungnya.
+Berdasarkan analisis distribusi target pada Bab 4.3 dan 5.4, persentase kelas `0` (49,43%) dan kelas `1` (50,57%) sangat seimbang. Oleh karena itu, **teknik penyeimbangan data seperti SMOTE atau *undersampling* tidak diperlukan**.
 
 ### 5.6 Ringkasan Data Preparation
-
-**Per langkah, jelaskan:**
-1. **Apa yang dilakukan**
-
-- Memeriksa kualitas dataset, termasuk missing values, duplikasi, dan tipe data.
-- Membentuk target klasifikasi `RiskLevel` menjadi tiga kelas: Rendah, Sedang, dan Tinggi, berdasarkan nilai `FloodProbability`.
-- Memisahkan fitur (`X`) dan target (`y`), serta menghapus kolom `id` dan `FloodProbability` dari fitur prediktor.
-- Melakukan splitting training-validation sebesar 80:20 menggunakan stratifikasi dan `random_state=42`.
-- Menjalankan scaling dengan fitting pada training dan transformasi pada validation. Jenis scaler perlu dipastikan kembali karena definisinya belum tercantum pada notebook.
-- Belum melakukan balancing dan belum membentuk test set.
-
-2. **Mengapa penting**
-
-Pemeriksaan kualitas data diperlukan untuk memastikan data tidak memiliki nilai kosong atau baris duplikat yang dapat mengganggu proses pembelajaran. Pembentukan `RiskLevel` diperlukan karena tujuan proyek adalah klasifikasi tiga kelas, bukan memprediksi nilai probabilitas secara langsung. Pemisahan fitur dan target mencegah informasi pembentuk label masuk kembali sebagai prediktor. Stratified splitting membantu menjaga distribusi kelas pada subset data, sedangkan scaling membantu menyamakan skala fitur untuk algoritma yang membutuhkannya. Balancing perlu dipertimbangkan karena distribusi kelas tidak merata, tetapi penerapannya harus dibatasi pada training set.
-
-3. **Bagaimana implementasinya**
-
-Pemeriksaan dilakukan menggunakan fungsi pandas `isnull()`, `duplicated()`, dan `dtypes`. Target dibuat menggunakan `pd.cut()` dengan batas `[0.0, 0.45, 0.55, 1.0]` dan label `Rendah`, `Sedang`, serta `Tinggi`. Fitur dan target dipisahkan menggunakan `drop()` dan pemilihan kolom `RiskLevel`. Pembagian data dilakukan menggunakan `train_test_split(test_size=0.2, random_state=42, stratify=y)`. Scaling pada notebook dijalankan dengan `fit_transform()` untuk training dan `transform()` untuk validation. Sebelum masuk tahap modeling, proses perlu dilengkapi dengan splitting tiga subset (training, validation, dan test), memastikan definisi scaler tersedia, serta mengevaluasi kebutuhan balancing berdasarkan performa model pada data validation.
+1. **Apa yang dilakukan:**
+  - Melakukan validasi kebersihan data pada dataset `flood_risk_dataset.csv` (10.000 baris × 14 kolom) di notebook **`01_learning_problem_eda.ipynb`**, memastikan 0 *missing values*, 0 duplikat, dan 0 *outlier* ekstrem.
+  - Mengaplikasikan *One-Hot Encoding* (`drop_first=True`) pada 2 fitur kategorikal (`Land Cover` dan `Soil Type`) di notebook **`02_data_preparation.ipynb`**, memetakan matriks `X` menjadi 19 fitur numerik.
+  - Melakukan *stratified splitting* data dengan rasio 80:20 ($8.000$ sampel *train*, $2.000$ sampel *validation*).
+  - Menjalankan *StandardScaler* secara terpisah (*fit* pada *train*, *transform* pada *val*) untuk mencegah kebocoran data.
+2. **Mengapa penting:**
+  - *One-Hot Encoding* memungkinkan algoritma matematika ML/DL membaca data kategorikal tanpa implikasi urutan numerik.
+  - *Feature scaling* mencegah fitur berdimensi besar mendominasi fungsi biaya (*cost function*) dan pembaruan gradien.
+  - Pembagian data *stratified* menjaga konsistensi proporsi kelas target pada subset uji, sementara pemisahan ke dalam dua notebook menjaga modularitas kode.
+3. **Bagaimana implementasinya:**
+  - Pemeriksaan awal & EDA (`01_learning_problem_eda.ipynb`): `isnull()`, `duplicated()`, `describe()`, `countplot()`, dan `histplot()`.
+  - Transformasi kategorikal (`02_data_preparation.ipynb`): `pd.get_dummies()`.
+  - Data splitting (`02_data_preparation.ipynb`): `train_test_split(..., test_size=0.2, random_state=42, stratify=y)`.
+  - Standardisasi (`02_data_preparation.ipynb`): `StandardScaler().fit_transform(X_train)` dan `transform(X_val)`.
 
 ---
 
