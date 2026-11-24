@@ -270,18 +270,18 @@ Berdasarkan analisis distribusi target pada Bab 4.3 dan 5.4, persentase kelas `0
 
 #### 6.1.1 Deskripsi Model  **[M]**
 
-**Nama Model:** [Nama model, misal: Logistic Regression]  
+**Nama Model:** Logistic Regression
 **Teori Singkat:**  
-[Jelaskan secara singkat bagaimana model ini bekerja]  
+Logistic Regression memodelkan probabilitas kejadian banjir ($P(Y=1 \mid \mathbf{x})$) dengan menghitung kombinasi linear dari fitur-fitur input ke dalam bentuk log-odds (logit) log-odds tersebut kemudian dipetakan menjadi probabilitas pada rentang $[0, 1]$ menggunakan fungsi aktivasi sigmoid $\sigma(z) = \frac{1}{1 + e^{-z}}$. Model melatih bobot $\mathbf{w}$ dan bias $b$ dengan meminimalkan Binary Cross-Entropy Loss (serta regularisasi L2) sehingga prediksi mendekati label aktual Flood Occurred.
 **Alasan Pemilihan:**  
-[Mengapa memilih model ini sebagai baseline?]
+Logistic Regression dipilih sebagai baseline karena proses pelatihannya cepat, koefisien fiturnya mudah diinterpretasikan (menunjukkan arah pengaruh fitur seperti Rainfall (mm), River Discharge (m³/s), atau Elevation (m)), dan menghasilkan keluaran probabilitas yang jelas sebagai tolok ukur awal sebelum mencoba model yang lebih kompleks.
 
 #### 6.1.2 Hypothesis Space & Inductive Bias  **[M]**
 
-- **Model family / arsitektur:** [misal: model linear]
-- **Hypothesis space:** [himpunan fungsi yang dapat direpresentasikan, misal: batas keputusan linear]
-- **Inductive bias / asumsi:** [misal: hubungan fitur-target linear, fitur independen]
-- **Implikasi terhadap dataset Anda:** [apakah asumsi cocok dengan data?]
+- **Model family / arsitektur:** Model klasifikasi linear probabilistik (generalized linear model dengan logit link / fungsi sigmoid).
+- **Hypothesis space:** Hypothesis space: Himpunan seluruh fungsi batas keputusan linear (hyperplane) pada ruang fitur berdimensi-$d$ (setelah standardisasi fitur numerik dan one-hot encoding fitur kategorikal seperti Land Cover dan Soil Type)
+- **Inductive bias / asumsi:** Mengasumsikan hubungan antara fitur input dan log-odds target bersifat linear serta aditif, tidak menangkap interaksi kompleks/non-linear antarfitur secara otomatis tanpa rekayasa fitur tambahan, dan cenderung memilih bobot berukuran kecil karena regularisasi L2.
+- **Implikasi terhadap dataset Anda:** Pada flood_risk_dataset_india.csv (10.000 baris, distribusi target Flood Occurred seimbang sekitar 50,57% kelas 1 dan 49,43% kelas 0), asumsi batas keputusan linear kemungkinan kurang cocok / terbatas apabila risiko banjir sebenarnya dipengaruhi oleh ambang batas atau interaksi non-linear antarvariabel (misalnya curah hujan tinggi bersamaan dengan elevasi rendah dan tutupan lahan tertentu). Oleh karena itu, model ini berfungsi sebagai batas bawah (benchmark) untuk melihat seberapa besar peningkatan performa yang bisa dicapai oleh model non-linear pada tahap berikutnya.
 
 #### 6.1.3 Implementasi (Ringkas)  **[M]**
 ```python
