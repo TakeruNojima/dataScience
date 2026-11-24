@@ -285,30 +285,50 @@ Logistic Regression dipilih sebagai baseline karena proses pelatihannya cepat, k
 
 #### 6.1.3 Implementasi (Ringkas)  **[M]**
 ```python
-# Contoh kode (opsional, bisa dipindah ke GitHub)
 from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
 
-model_baseline = LogisticRegression(C=1.0, max_iter=100)
+model_baseline = Pipeline([
+    ('preprocessor', preprocessor),
+    ('classifier', LogisticRegression(C=1.0, solver='lbfgs', max_iter=100, random_state=42))
+])
+
 model_baseline.fit(X_train, y_train)
-y_pred_baseline = model_baseline.predict(X_test)
+y_val_pred = model_baseline.predict(X_val)
+y_val_prob = model_baseline.predict_proba(X_val)[:, 1]
 ```
 
 #### 6.1.4 Optimization: Objective, Hyperparameter & Regularisasi  **[O]**
 
-**Objective/loss yang dioptimalkan:** [misal: log-loss + L2]  
+**Objective/loss yang dioptimalkan:**  Binary Cross-Entropy Loss (Log-Loss) dengan regularisasi L2 (Ridge), yaitu meminimalkan: $$\mathcal{J}(\mathbf{w}, b) = -\frac{1}{N}\sum_{i=1}^{N}\Big[y_i \log(\hat{p}_i) + (1 - y_i)\log(1 - \hat{p}_i)\Big] + \frac{1}{2C}\Vert{}\mathbf{w}\Vert{}_2^2$$
 **Parameter yang digunakan:**
 ```
-[Tuliskan parameter penting, contoh:]
-- C (regularization): 1.0
-- solver: 'lbfgs'
-- max_iter: 100
+penalty (regularization): 'l2' (menekan norma bobot $\mathbf{w}$ agar tidak terlalu besar dan lebih tahan terhadap noise)
+C (inverse regularization strength): 1.0
+solver: 'lbfgs'
+max_iter: 100 (sudah konvergen pada data yang telah distandardisasi; dapat dinaikkan jika diperlukan pada eksperimen lanjutan)
+random_state: 42
 ```
 
 #### 6.1.5 Hasil Awal  **[O → P]**
 
 **[Tuliskan hasil awal pada validation set; evaluasi akhir pada test set dijelaskan di Bab 7]**
 
----
+Pada evaluasi awal menggunakan validation set (1.500 sampel, threshold probabilitas default 0.5):
+
+    Accuracy: 0.4867
+
+    Precision: 0.4933
+
+    Recall: 0.5349
+
+    F1-Score: 0.5133
+
+    ROC-AUC: 0.4934
+
+    Confusion Matrix (Validation Set): TN = 324, FP = 417, FN = 353, TP = 406
+
+Performa awal model baseline masih berada di sekitar ~0.49–0.53 pada data fitur mentah, sehingga menjadi titik acuan awal (benchmark) untuk dibandingkan dengan model ensemble non-linear (Random Forest pada Subbab 6.2) maupun tahap optimization berikutnya. Evaluasi akhir pada test set akan dibahas pada Bab 7.
 
 ### 6.2 Model 2 — ML / Advanced Model
 
